@@ -1,46 +1,49 @@
 import React from 'react';
-import { Pencil, Trash2, Shield } from 'lucide-react';
-import { Post } from '../types';
+import { Pencil, Trash2, BookOpen } from 'lucide-react';
+import { Post, Theme } from '../types';
 
 interface PostListProps {
   posts: Post[];
   onEdit: (post: Post) => void;
   onDelete: (id: number) => void;
+  theme: Theme;
+  themeColors: {
+    primary: string;
+    accent: string;
+    hover: string;
+    text: string;
+    border: string;
+    shadow: string;
+  };
 }
 
-const PostList: React.FC<PostListProps> = ({ posts, onEdit, onDelete }) => {
+const PostList: React.FC<PostListProps> = ({ posts, onEdit, onDelete, themeColors }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       {posts.map((post) => (
         <div 
           key={post.id} 
-          className="bg-gray-800 rounded-lg shadow-xl p-6 flex flex-col border border-cyan-500/30 backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-200"
-          style={{
-            backgroundImage: `url(https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=400&q=80)`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundBlendMode: 'overlay'
-          }}
+          className={`bg-white rounded-lg shadow-xl p-4 sm:p-6 flex flex-col border ${themeColors.border} hover:transform hover:scale-102 transition-all duration-200`}
         >
-          <div className="flex items-center gap-2 mb-3">
-            <Shield className="text-cyan-400" size={30} />
-            <h2 className="text-xl font-bold text-cyan-300 line-clamp-2">{post.title}</h2>
+          <div className="flex items-start gap-2 mb-3">
+            <BookOpen className={`${themeColors.text} flex-shrink-0 w-5 h-5`} />
+            <h2 className="text-lg sm:text-xl font-bold text-gray-800 line-clamp-2">{post.title}</h2>
           </div>
-          <p className="text-cyan-100 mb-4 flex-grow line-clamp-3">{post.body}</p>
-          <div className="flex justify-end space-x-2 pt-4 border-t border-cyan-500/30">
+          <p className="text-gray-600 mb-4 flex-grow line-clamp-3">{post.body}</p>
+          <div className={`flex justify-end space-x-2 pt-4 border-t ${themeColors.border}`}>
             <button
               onClick={() => onEdit(post)}
-              className="p-2 text-cyan-400 hover:bg-cyan-900/50 rounded-full transition-colors"
-              title="Edit Quest"
+              className={`p-2 ${themeColors.text} hover:${themeColors.accent} hover:text-white rounded-full transition-colors`}
+              title="Edit Post"
             >
-              <Pencil size={25} />
+              <Pencil className="w-4 h-4" />
             </button>
             <button
               onClick={() => onDelete(post.id)}
-              className="p-2 text-red-400 hover:bg-red-900/50 rounded-full transition-colors"
-              title="Delete Quest"
+              className="p-2 text-red-600 hover:bg-red-500 hover:text-white rounded-full transition-colors"
+              title="Delete Post"
             >
-              <Trash2 size={25} />
+              <Trash2 className="w-4 h-4" />
             </button>
           </div>
         </div>

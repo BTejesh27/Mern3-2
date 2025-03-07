@@ -5,16 +5,46 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
+.animate-gradient-x {
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+}
 
 body {
   margin: 0;
   font-family: 'Oxanium', sans-serif;
-  color: #e2e8f0;
+  color: #374151;
 }
 
 .font-gaming {
   font-family: 'Cinzel', serif;
-  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
   letter-spacing: 0.05em;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+                 0 0 10px rgba(255, 255, 255, 0.2),
+                 0 0 15px rgba(255, 165, 0, 0.2),
+                 0 0 20px rgba(255, 165, 0, 0.1);
+  }
+  to {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
+                 0 0 20px rgba(255, 255, 255, 0.3),
+                 0 0 30px rgba(255, 165, 0, 0.3),
+                 0 0 40px rgba(255, 165, 0, 0.2);
+  }
 }
